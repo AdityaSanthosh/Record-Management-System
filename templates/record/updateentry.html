@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Entry</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<style>
+    #heading {
+        font-family: "Calibri Light";
+    }
+    #content {
+        font-family: "Droid Sans";
+    }
+</style>
+    <div class="container">
+        <div class="offset-sm-2">
+            <br><br><br>
+            <div class="row"><h3 class="text-danger offset-sm-4" id="heading"><strong>Update Entry</strong></h3></div>
+            <br>
+            <div class="row" id="content">
+                <div class="col-12 offset-sm-1">
+                    <br><br>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h6><strong>Entry: {{ id }}</strong></h6><br>
+                        <div class="form-group">
+                            <label for="username" class="mr-5">Name</label>
+                            <input type="text" name="username" value="{{ username }}" id="username">
+                        </div>
+                        <div class="form-group">
+                            <label class="mr-5" for="emailfield">Email</label>
+                            <input type="email" name="email" value="{{ email }}" id="emailfield">
+                        </div>
+                        <div class="form-group">
+                            <label class="mr-4" for="phonefield">PhoneNo</label>
+                            <input type="tel" name="phone" value="{{ phone }}" id="phonefield">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

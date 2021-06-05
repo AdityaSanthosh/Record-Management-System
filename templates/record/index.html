@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Record Entry System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<style>
+    #heading {
+        font-family: "Calibri Light";
+    }
+    #content {
+        font-family: "Droid Sans";
+    }
+</style>
+<br>
+<br>
+    <div class="container" id="content">
+        <div class="offset-sm-1">
+            <div class="row"><h3 class="text-danger offset-sm-4" id="heading"><Strong>Record Entry System</Strong></h3></div>
+            <br>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">S.No</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">PhoneNo.</th>
+                            <th scope="col">&nbsp;&nbsp;&nbsp;Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in person %}
+                        <tr>
+                            <th scope="row">{{ p.id }}</th>
+                            <td id="name">{{ p.name }}</td>
+                            <td id="email">{{ p.email }}</td>
+                            <td id="phoneno">{{ p.phone_number }}</td>
+                            <td><a class="btn btn-sm btn-danger text-white" id="deleteentry" href="{% url 'deleteentry' entryid=p.id %}">Del</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-sm btn-danger text-white" href="{% url 'updateentry' entryid=p.id %}" target="_blank">Edit</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a class="btn btn-sm btn-info" href="./newentry" target="_blank">New Entry</a>
+                <button type="submit" class="btn btn-sm btn-warning" onClick="refreshPage()">Refresh</button>
+            </div>
+        </div>
+       </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        function refreshPage() {
+            window.location.reload()
+        }
+    </script>
+</body>
+</html>
