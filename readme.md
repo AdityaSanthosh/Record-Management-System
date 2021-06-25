@@ -16,7 +16,7 @@ I did this project to learn more about backend topics
 like database persistance, production and deployment specifics in General and in Django, Model - View
 pattern. 
 
-[Web capture_26-6-2021_15054_record-management-system herokuapp com](https://user-images.githubusercontent.com/45935479/123481201-04ef7980-d621-11eb-8f02-e10b6e050be7.jpeg)
+![image](https://user-images.githubusercontent.com/45935479/123481201-04ef7980-d621-11eb-8f02-e10b6e050be7.jpeg)
 
 ![image](https://user-images.githubusercontent.com/45935479/123481345-35cfae80-d621-11eb-8e48-0164ad893c0e.png)
 
