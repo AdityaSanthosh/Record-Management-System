@@ -1,17 +1,23 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from record.models import Person
+from users.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 def index(request):
-    db = Person.objects.all()
-    personname = {
-        "person": db
-    }
-    return render(request, template_name='record/index.html', context=personname)
+    if request.user.is_authenticated:
+        db = Person.objects.all().order_by('-name')
+        personname = {
+            "person": db
+        }
+        return render(request, template_name='record/index.html', context=personname)
+    else:
+        return render(request, template_name='record/homepage.html')
 
 
+@login_required
 def newentry(request):
     if request.method == 'POST':
         name = request.POST["username"]
@@ -20,15 +26,19 @@ def newentry(request):
         newperson = Person(name=name, email=email, phone_number=phoneno)
         newperson.save()
         HttpResponse('New Entry Added!')
+        messages.success(request, f'New Entry Added')
     return render(request, 'record/newentry.html')
 
 
+@login_required
 def delete_entry(request, entryid):
     entry = Person.objects.get(id=entryid)
     entry.delete()
+    messages.success(request, f'Entry Deleted')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@login_required
 def update_entry(request, entryid):
     databaseentry = Person.objects.get(id=entryid)
     username0 = databaseentry.name
@@ -42,6 +52,7 @@ def update_entry(request, entryid):
         databaseentry.email = email
         databaseentry.phone_number = phone
         databaseentry.save()
+        messages.success(request, f'Entry Updated')
     context = {
         "id": entryid,
         "username": username0,
