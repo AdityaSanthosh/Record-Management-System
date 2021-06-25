@@ -3,6 +3,8 @@
     <br><br>
     <div class="row">
         <div class="offset-sm-3">
+            <br>
+            <div class="row"><h3 class="text-danger offset-sm-1">Update Entry</h3></div>
             <form action={% url 'newentry' %} method="post">
                 {% csrf_token %}
                 <div class="form-group">
