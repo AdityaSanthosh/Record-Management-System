@@ -1,14 +1,13 @@
 # **Record Entry Management System**
 
-Features :
+**_Features_** :
 
-Each user can have their own profile
+* Each user can have their own profile
 
-Add New Entries, Edit them, Delete them, Update them
+* Add New Entries, Edit them, Delete them, Update them
 
-Front End is written in Bootstrap, HTML
+* Front End is written in Bootstrap, HTML
 
-Back End is written in Django, Python
+* Back End is written in Django, Python
 
-
-More Functionality will be added soon.
+_More Functionality will be added soon._
