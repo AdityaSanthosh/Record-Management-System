@@ -64,13 +64,33 @@
                             <td id="name">{{ p.name }}</td>
                             <td id="email">{{ p.email }}</td>
                             <td id="phoneno">{{ p.phone_number }}</td>
-                            <td><a class="btn btn-sm btn-danger text-white" id="deleteentry" href="{% url 'deleteentry' entryid=p.id %}">Del</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <td><button class="btn btn-sm btn-danger text-white" data-toggle="modal" data-target="#deletemodal">Del</button>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a class="btn btn-sm btn-danger text-white" href="{% url 'updateentry' entryid=p.id %}" target="_blank">Edit</a></td>
                         </tr>
+                            <div class="modal" tabindex="-1" id="deletemodal" role="dialog">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Confirm Deletion</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p>Do you really want to Delete the Entry?</p>
+                                      <p class="text-danger">This action cannot be undone.</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger"><a style="text-decoration: none" class="text-white" id="deleteentry" href="{% url 'deleteentry' entryid=p.id %}">Delete</a></button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                         {% endfor %}
                     </tbody>
                 </table>
-                <a class="btn btn-sm btn-info" href="./newentry" target="_blank">New Entry</a>
+                <a class="btn btn-sm btn-info" href="./newentry">New Entry</a>
                 <button type="submit" class="btn btn-sm btn-warning" onClick="refreshPage()">Refresh</button>
             </div>
         </div>

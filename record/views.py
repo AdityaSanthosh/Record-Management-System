@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from record.models import Person
-from users.models import User
+from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -28,6 +29,13 @@ def newentry(request):
         HttpResponse('New Entry Added!')
         messages.success(request, f'New Entry Added')
     return render(request, 'record/newentry.html')
+
+
+class CreateNewEntry(LoginRequiredMixin, CreateView):
+    model = Person
+    fields = ['name', 'email', 'phone_number']
+    template_name = 'record/newentry.html'
+    success_url = '/'
 
 
 @login_required
