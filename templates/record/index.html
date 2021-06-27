@@ -58,9 +58,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for p in person %}
+                        {% for p in Entry %}
                         <tr>
-                            <th scope="row">{{ p.id }}</th>
+                            <th scope="row">{{ forloop.counter }}</th>
                             <td id="name">{{ p.name }}</td>
                             <td id="email">{{ p.email }}</td>
                             <td id="phoneno">{{ p.phone_number }}</td>

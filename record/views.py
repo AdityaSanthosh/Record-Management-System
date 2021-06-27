@@ -1,5 +1,5 @@
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from record.models import Person
+from django.shortcuts import render, HttpResponseRedirect
+from record.models import Entry
 from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -9,38 +9,43 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
-        db = Person.objects.all().order_by('-name')
-        personname = {
-            "person": db
+        db = Entry.objects.filter(user=request.user).order_by('-name')
+        Entryname = {
+            "Entry": db
         }
-        return render(request, template_name='record/index.html', context=personname)
+        return render(request, template_name='record/index.html', context=Entryname)
     else:
         return render(request, template_name='record/homepage.html')
 
 
-@login_required
-def newentry(request):
-    if request.method == 'POST':
-        name = request.POST["username"]
-        email = request.POST["email"]
-        phoneno = request.POST["phone"]
-        newperson = Person(name=name, email=email, phone_number=phoneno)
-        newperson.save()
-        HttpResponse('New Entry Added!')
-        messages.success(request, f'New Entry Added')
-    return render(request, 'record/newentry.html')
+# @login_required
+# def newentry(request):
+#     if request.method == 'POST':
+#         name = request.POST["username"]
+#         email = request.POST["email"]
+#         phoneno = request.POST["phone"]
+#         newEntry = Entry(name=name, email=email, phone_number=phoneno)
+#         newEntry.user = request.user
+#         newEntry.save()
+#         HttpResponse('New Entry Added!')
+#         messages.success(request, f'New Entry Added')
+#     return render(request, 'record/newentry.html')
 
 
 class CreateNewEntry(LoginRequiredMixin, CreateView):
-    model = Person
+    model = Entry
     fields = ['name', 'email', 'phone_number']
     template_name = 'record/newentry.html'
     success_url = '/'
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(CreateNewEntry, self).form_valid(form=form)
+
 
 @login_required
 def delete_entry(request, entryid):
-    entry = Person.objects.get(id=entryid)
+    entry = Entry.objects.get(id=entryid)
     entry.delete()
     messages.success(request, f'Entry Deleted')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -48,10 +53,7 @@ def delete_entry(request, entryid):
 
 @login_required
 def update_entry(request, entryid):
-    databaseentry = Person.objects.get(id=entryid)
-    username0 = databaseentry.name
-    email0 = databaseentry.email
-    phone0 = databaseentry.phone_number
+    databaseentry = Entry.objects.get(id=entryid)
     if request.method == 'POST':
         username = request.POST["username"]
         email = request.POST["email"]
@@ -63,8 +65,8 @@ def update_entry(request, entryid):
         messages.success(request, f'Entry Updated')
     context = {
         "id": entryid,
-        "username": username0,
-        "email": email0,
-        "phone": phone0,
+        "username": databaseentry.name,
+        "email": databaseentry.email,
+        "phone": databaseentry.phone_number,
     }
     return render(request, template_name='record/updateentry.html', context=context)
