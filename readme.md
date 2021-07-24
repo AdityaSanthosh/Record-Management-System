@@ -1,5 +1,9 @@
 # **Record Entry Management System**
 
+*You can view the site url here*
+
+https://github.com/AdityaSanthosh/Record-Management-System
+
 **_Features_** :
 
 * Each user can have their own profile
