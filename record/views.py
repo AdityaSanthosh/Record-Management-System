@@ -1,12 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render, HttpResponseRedirect
 from record.models import Entry
+from users.models import Profile
 from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-indexmap = {}
 
 # Create your views here.
 def index(request):
@@ -33,7 +33,6 @@ def newentry(request):
         newEntry.save()
         HttpResponse('New Entry Added!')
         messages.success(request, f'New Entry Added')
-        # indexmap[newEntry.name] = newEntry
     return render(request, 'record/newentry.html')
 
 #
@@ -83,27 +82,29 @@ def searchresult(request):
         searchkey = request.POST['searchkey']
     except KeyError:
         searchkey = "Nothing"
-    indexentries(request)
-    results = indexmap.get(searchkey)
+    # indexentries(request)
+    # results = indexmap.get(searchkey)
+    query_result = Profile.SearchEntry.get_query_value(searchkey, request.user)
     context = {
         "searchkey": searchkey,
-        "results": results,
+        # "results": results,
+        "results": query_result,
     }
     return render(request, template_name='record/searchresult.html', context=context)
 
-
-@login_required
-def indexentries(request):
-    if request.user.is_authenticated:
-        db = Entry.objects.filter(user=request.user).order_by('-name')
-        Entryname = {
-            "Entry": db,
-        }
-        i = 0
-        for x in db:
-            indexmap[x.name] = x
-            i += 1
-        messages.success(request, f'Indexing Complete')
-        return render(request, template_name='record/index.html', context=Entryname)
-    else:
-        return render(request, template_name='record/homepage.html')
+#
+# @login_required
+# def indexentries(request):
+#     if request.user.is_authenticated:
+#         db = Entry.objects.filter(user=request.user).order_by('-name')
+#         Entryname = {
+#             "Entry": db,
+#         }
+#         i = 0
+#         for x in db:
+#             indexmap[x.name] = x
+#             i += 1
+#         messages.success(request, f'Indexing Complete')
+#         return render(request, template_name='record/index.html', context=Entryname)
+#     else:
+#         return render(request, template_name='record/homepage.html')

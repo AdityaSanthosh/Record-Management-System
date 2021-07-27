@@ -8,5 +8,5 @@ urlpatterns = [
     path('deleteentry/<int:entryid>/', views.delete_entry, name='deleteentry'),
     path('updateentry/<int:entryid>/', views.update_entry, name='updateentry'),
     path('searchresult/', views.searchresult, name='searchresult'),
-    path('indexing/', views.indexentries, name='indexing')
+    # path('indexing/', views.indexentries, name='indexing')
 ]

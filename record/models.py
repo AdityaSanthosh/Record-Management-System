@@ -9,3 +9,10 @@ class Entry(models.Model):
     name = models.CharField(max_length=200)
     phone_number = models.PositiveIntegerField(validators=[MaxValueValidator(9999999999)])
     email = models.EmailField(max_length=200)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['name']),
+            models.Index(fields=['email']),
+            models.Index(fields=['phone_number']),
+        ]
