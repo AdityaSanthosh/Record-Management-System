@@ -15,6 +15,9 @@
     #content {
         font-family: "Droid Sans";
     }
+    .sameline {
+        display: inline-block;
+    }
 </style>
 <br>
 <br>
@@ -44,7 +47,19 @@
                 </div>
             </div>
             <br>
+       <br>
         {% block content %}
+        <div class="row">
+            <form action={% url 'searchresult'%} method="post" class="col-12 col-sm-12">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="offset-sm-2 col-sm-6" type="text" name="searchkey" value="" placeholder="Search Entries" id="searchkey">
+                    <button class="ml-2 btn btn-success" type="submit">Submit</button>
+                    <br>
+                    <p class="offset-sm-4"><a href="indexing">index all entries</a></p>
+                </div><br>
+            </form>
+        </div>
         <div class="row">
             <div class="col-12">
                 <table class="table">
@@ -58,7 +73,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for p in Entry %}
+                             {% for p in Entry %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
                             <td id="name">{{ p.name }}</td>
@@ -94,7 +109,7 @@
                 <button type="submit" class="btn btn-sm btn-warning" onClick="refreshPage()">Refresh</button>
             </div>
         </div>
-        {% endblock %}
+       {% endblock %}
        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

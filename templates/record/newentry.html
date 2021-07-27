@@ -1,44 +1,24 @@
-{#{% extends 'record/index.html' %}#}
-{#{% block content %}#}
-{#    <br><br>#}
-{#    <div class="row">#}
-{#        <div class="offset-sm-3">#}
-{#            <br>#}
-{#            <div class="row"><h3 class="text-danger offset-sm-1">New Entry</h3></div>#}
-{#            <form action={% url 'newentry' %} method="post">#}
-{#                {% csrf_token %}#}
-{#                <div class="form-group">#}
-{#                    <label for="username" class="mr-5">Name</label>#}
-{#                    <input type="text" name="username" value="" id="username">#}
-{#                </div>#}
-{#                <div class="form-group">#}
-{#                    <label class="mr-5" for="emailfield">Email</label>#}
-{#                    <input type="email" name="email" value="" id="emailfield">#}
-{#                </div>#}
-{#                <div class="form-group">#}
-{#                    <label class="mr-4" for="phonefield">PhoneNo</label>#}
-{#                    <input type="tel" name="phone" value="" id="phonefield">#}
-{#                </div>#}
-{#                <div class="form-group">#}
-{#                    <button class="btn btn-success" type="submit">Submit</button>#}
-{#                </div>#}
-{#            </form>#}
-{#        </div>#}
-{#    </div>#}
-{#{% endblock %}#}
-{##}
 {% extends 'record/index.html' %}
-{% load crispy_forms_tags %}
 {% block content %}
     <br><br>
     <div class="row">
         <div class="offset-sm-3">
-            <form method="post">
+            <br>
+            <div class="row"><h3 class="text-danger offset-sm-1">New Entry</h3></div>
+            <form action={% url 'newentry' %} method="post">
                 {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">New Entry</legend>
-                    {{ form|crispy }}
-                </fieldset>
+                <div class="form-group">
+                    <label for="username" class="mr-5">Name</label>
+                    <input type="text" name="username" value="" id="username">
+                </div>
+                <div class="form-group">
+                    <label class="mr-5" for="emailfield">Email</label>
+                    <input type="email" name="email" value="" id="emailfield">
+                </div>
+                <div class="form-group">
+                    <label class="mr-4" for="phonefield">PhoneNo</label>
+                    <input type="tel" name="phone" value="" id="phonefield">
+                </div>
                 <div class="form-group">
                     <button class="btn btn-success" type="submit">Submit</button>
                 </div>
@@ -46,3 +26,23 @@
         </div>
     </div>
 {% endblock %}
+{##}
+{#{% extends 'record/index.html' %}#}
+{#{% load crispy_forms_tags %}#}
+{#{% block content %}#}
+{#    <br><br>#}
+{#    <div class="row">#}
+{#        <div class="offset-sm-3">#}
+{#            <form method="post">#}
+{#                {% csrf_token %}#}
+{#                <fieldset class="form-group">#}
+{#                    <legend class="border-bottom mb-4">New Entry</legend>#}
+{#                    {{ form|crispy }}#}
+{#                </fieldset>#}
+{#                <div class="form-group">#}
+{#                    <button class="btn btn-success" type="submit">Submit</button>#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}
