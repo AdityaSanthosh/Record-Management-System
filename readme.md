@@ -1,8 +1,10 @@
 # **Record Entry Management System**
 
-*You can view the site url here*
+Please run 
 
-https://github.com/AdityaSanthosh/Record-Management-System
+`pip install -r requirements.txt` and
+`python manage.py runserver`
+
 
 **_Features_** :
 
